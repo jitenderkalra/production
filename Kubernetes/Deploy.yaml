@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notejam-deploy
+  labels:
+    app: notejam
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: notejam
+  template:
+    metadata:
+      labels:
+        app: notejam
+    spec:
+      containers:
+      - name: notejam
+        image: 321040826896.dkr.ecr.us-east-1.amazonaws.com/notejam:latest

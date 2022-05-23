@@ -1,0 +1,19 @@
+kind: Ingress
+metadata:
+  name: blog
+  labels:
+    app: blog
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            pathType: Prefix
+            backend:
+              service:
+                name: notejam-svc
+                port:
+                  number: 8080

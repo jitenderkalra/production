@@ -1,0 +1,14 @@
+---
+- hosts: ansible
+
+  tasks:
+  - name: create docker image
+    command: docker build -t notejam:latest .
+    args:
+     chdir: /opt/docker
+
+  - name: create tag to push image onto dockerhub
+    command: docker tag notejam:latest jitenderkalra/notejam:latest
+
+  - name: push docker image
+    command: docker push jitenderkalra/notejam:latest

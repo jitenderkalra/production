@@ -1,0 +1,18 @@
+---
+- hosts: ansible-server
+  become: true
+
+  tasks:
+  - name: create docker image using jar file
+    command: docker build -t notejam:latest .
+    args:
+      chdir: /opt/k8s-lab
+
+  - name: create tag to image
+    command: docker tag notejam jitenderkalra/notejam
+
+  - name: push image on to dockerhub
+    command: docker push jitenderkalra/notejam
+  - name: remove docker images form ansible server
+    command: docker rmi noteam:latest jitenderkalra/notejam
+    ignore_errors: yes
